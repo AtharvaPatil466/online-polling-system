@@ -1,0 +1,20 @@
+{
+  "name": "online-polling-system",
+  "version": "1.0.0",
+  "description": "Minimal full-stack Online Polling System with Minimoth OTP authentication",
+  "private": true,
+  "scripts": {
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev"
+  },
+  "keywords": [
+    "polling",
+    "react",
+    "express",
+    "minimoth",
+    "otp",
+    "workshop"
+  ],
+  "author": "",
+  "license": "MIT"
+}

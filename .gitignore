@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Production build
+dist/
+*/dist/
+
+# SQLite database files
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+backend/polling.db
+
+# Environment files (keep .env.example tracked)
+.env
+*.env
+!.env.example
+!*/.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
