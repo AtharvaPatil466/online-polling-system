@@ -8,6 +8,7 @@ export function AuthPage({ onLoginSuccess }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [infoMsg, setInfoMsg] = useState('');
+  const [isSandbox, setIsSandbox] = useState(false);
 
   const handleSendOtp = async (e) => {
     e.preventDefault();
@@ -24,6 +25,7 @@ export function AuthPage({ onLoginSuccess }) {
       const data = await sendOtp(phone);
       if (data.success) {
         setStep(2);
+        setIsSandbox(Boolean(data.isSandbox || data.demoMode));
         setInfoMsg(data.message || 'OTP sent successfully!');
       } else {
         setError(data.error || 'Failed to send OTP.');
@@ -103,7 +105,11 @@ export function AuthPage({ onLoginSuccess }) {
             </button>
 
             <div className="demo-hint">
-              💡 <strong>Workshop Sandbox:</strong> If testing locally without SMS credits, default OTP is <code>000000</code>.
+              {isSandbox ? (
+                <>💡 <strong>Workshop Sandbox:</strong> Testing with test key, default OTP is <code>000000</code>.</>
+              ) : (
+                <>📱 <strong>Live Mode:</strong> Real OTP will be delivered directly to your phone via WhatsApp / SMS.</>
+              )}
             </div>
           </form>
         ) : (
@@ -134,6 +140,14 @@ export function AuthPage({ onLoginSuccess }) {
             >
               {loading ? 'Verifying...' : 'Verify & Enter Polling System'}
             </button>
+
+            <div className="demo-hint" style={{ marginTop: '0.85rem' }}>
+              {isSandbox ? (
+                <>💡 Use sandbox OTP <code>000000</code> to verify.</>
+              ) : (
+                <>📲 Please check your WhatsApp / SMS messages for the code.</>
+              )}
+            </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>
               <button
